@@ -5,39 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You're Invited!!</title>
-    <!-- tailwindcss -->
+    <!-- Tailwind -->
     <link rel="stylesheet" href="src/output.css">
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* custom AOS animation */
+        /* Custom AOS: McQueen drive-in */
         [data-aos="drive-in-left"] {
             opacity: 0;
             transform: translateX(-100vw);
-            /* start off-screen left */
             transition-property: transform, opacity;
             transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-            /* smoother easing */
         }
 
         [data-aos="drive-in-left"].aos-animate {
             opacity: 1;
             transform: translateX(0);
-            /* end at center position */
+        }
+
+        /* Intro animation (zoom + fade) */
+        .intro-text {
+            animation: zoomFade 2s ease-in-out forwards;
+        }
+
+        @keyframes zoomFade {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            30% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Hide the rest of the content initially */
+        .hidden-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show-content {
+            opacity: 1;
         }
     </style>
 </head>
 
-<body>
-    <section class="bg-[url('../assets/img/bg.png')] bg-center bg-fixed bg-cover h-screen m-0 bg-amber-50">
-        <div class="flex justify-center items-center flex-col h-full">
+<body class="overflow-x-hidden">
+    <section
+        class="bg-[url('../assets/img/bg.png')] bg-center bg-fixed bg-cover h-screen m-0 bg-amber-50 flex justify-center items-center flex-col relative overflow-hidden">
+
+        <!-- “You're Invited!” intro inside main flex -->
+        <div id="introText" class="absolute text-red-500 font-bold text-7xl md:text-8xl intro-text">
+            You're Invited!
+        </div>
+
+        <!-- Main content -->
+        <div id="mainContent" class="hidden-content flex flex-col justify-center items-center">
             <div class="text-red-500 font-bold md:text-6xl max-md:text-4xl" data-aos="fade-down">SPEED ON OVER</div>
+
             <div class="relative" data-aos="flip-down" data-aos-delay="500">
                 <svg viewBox="0 0 300 125" class="w-72 h-24 mt-5">
-                    <!-- invisible path for text to follow -->
                     <path id="curve" d="M 50,150 A 100,100 0 0,1 250,150" fill="transparent" />
-
-                    <!-- text along the path -->
                     <text text-anchor="middle" class="md:text-2xl max-md:text-lg font-semibold fill-gray-800">
                         <textPath href="#curve" startOffset="50%">
                             &amp; join us for
@@ -45,22 +86,42 @@
                     </text>
                 </svg>
             </div>
+
             <div class="md:text-8xl max-md:text-6xl font-bold" data-aos="fade-in" data-aos-delay="1000">FRANCO's</div>
-            <div class="md:text-3xl max-md:text-xl mt-2 mb-6" data-aos="fade-up" data-aos-delay="1500">Christening &amp;
-                1st
-                Birthday</div>
+
+            <div class="md:text-3xl max-md:text-xl mt-2 mb-6" data-aos="fade-up" data-aos-delay="1500">
+                Christening &amp; 1st Birthday
+            </div>
+
             <div class="image md:w-80 max-md:w-64" data-aos="drive-in-left" data-aos-delay="2000">
                 <img src="assets/img/car.png" alt="">
             </div>
         </div>
+
     </section>
 
-    <!-- AOS JS -->
+    <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1500, /* animation speed */
-            once: true       /* run animation only once */
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const intro = document.getElementById("introText");
+                const main = document.getElementById("mainContent");
+
+                intro.style.display = "none";
+                main.style.display = "flex"; // make visible
+                main.offsetHeight; // 🧠 force reflow (important)
+                main.classList.add("show-content");
+
+                // Initialize AOS AFTER content is visible
+                AOS.init({
+                    duration: 1500,
+                    once: true,
+                });
+
+                // Hard refresh ensures delays 3500–4000ms now work
+                AOS.refreshHard();
+            }, 2200);
         });
     </script>
 </body>
