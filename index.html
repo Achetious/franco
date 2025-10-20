@@ -5,10 +5,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You're Invited!!</title>
+    <!-- tailwindcss -->
+    <link rel="stylesheet" href="src/output.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* custom AOS animation */
+        [data-aos="drive-in-left"] {
+            opacity: 0;
+            transform: translateX(-100vw);
+            /* start off-screen left */
+            transition-property: transform, opacity;
+            transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+            /* smoother easing */
+        }
+
+        [data-aos="drive-in-left"].aos-animate {
+            opacity: 1;
+            transform: translateX(0);
+            /* end at center position */
+        }
+    </style>
 </head>
 
 <body>
+    <section class="bg-[url('../assets/img/bg.png')] bg-center bg-fixed bg-cover h-screen m-0 bg-amber-50">
+        <div class="flex justify-center items-center flex-col h-full">
+            <div class="text-red-500 font-bold md:text-6xl max-md:text-4xl" data-aos="fade-down">SPEED ON OVER</div>
+            <div class="relative" data-aos="flip-down" data-aos-delay="500">
+                <svg viewBox="0 0 300 125" class="w-72 h-24 mt-5">
+                    <!-- invisible path for text to follow -->
+                    <path id="curve" d="M 50,150 A 100,100 0 0,1 250,150" fill="transparent" />
 
+                    <!-- text along the path -->
+                    <text text-anchor="middle" class="md:text-2xl max-md:text-lg font-semibold fill-gray-800">
+                        <textPath href="#curve" startOffset="50%">
+                            &amp; join us for
+                        </textPath>
+                    </text>
+                </svg>
+            </div>
+            <div class="md:text-8xl max-md:text-6xl font-bold" data-aos="fade-in" data-aos-delay="1000">FRANCO's</div>
+            <div class="md:text-3xl max-md:text-xl mt-2 mb-6" data-aos="fade-up" data-aos-delay="1500">Christening &amp;
+                1st
+                Birthday</div>
+            <div class="image md:w-80 max-md:w-64" data-aos="drive-in-left" data-aos-delay="2000">
+                <img src="assets/img/car.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1500, /* animation speed */
+            once: true       /* run animation only once */
+        });
+    </script>
 </body>
 
 </html>
