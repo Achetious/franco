@@ -1,0 +1,100 @@
+     <!-- UNUSED CODE BOBBLE HEAD -->
+
+    <!-- <section class="h-screen m-0 flex justify-center items-center flex-col relative">
+        <div class="h-full w-full flex flex-col justify-center items-center">
+            <div class="bobble-container flex justify-center items-center relative">
+               
+                <div id="head" class="head">
+                    <img src="assets/img/franco.png" alt="Baby head" />
+                </div>
+
+
+                <div id="spring" class="spring"></div>
+
+                <div class="baby-body">
+                    <img src="assets/img/body.png" alt="Baby body" />
+                </div>
+            </div>
+        </div>
+    </section> -->
+ 
+ <!-- unused bobble head -->
+    <!-- <script>
+        const head = document.getElementById("head");
+        const spring = document.getElementById("spring");
+
+        let isDragging = false;
+        let headX = 0,
+            headY = 0;
+        let velocityX = 0,
+            velocityY = 0;
+        let targetX = 0,
+            targetY = 0;
+
+        const MAX_DISTANCE = 70;
+        const stiffness = 0.08;
+        const damping = 0.85;
+
+        const startDrag = (e) => {
+            isDragging = true;
+            e.preventDefault();
+        };
+
+        const moveDrag = (e) => {
+            if (!isDragging) return;
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            const y = e.touches ? e.touches[0].clientY : e.clientY;
+            const rect = spring.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top;
+
+            let dx = x - centerX;
+            let dy = y - centerY;
+
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance > MAX_DISTANCE) {
+                const angle = Math.atan2(dy, dx);
+                dx = Math.cos(angle) * MAX_DISTANCE;
+                dy = Math.sin(angle) * MAX_DISTANCE;
+            }
+
+            targetX = dx;
+            targetY = dy;
+        };
+
+        const endDrag = () => {
+            isDragging = false;
+            targetX = 0;
+            targetY = 0;
+        };
+
+        head.addEventListener("mousedown", startDrag);
+        head.addEventListener("touchstart", startDrag);
+        window.addEventListener("mousemove", moveDrag);
+        window.addEventListener("touchmove", moveDrag);
+        window.addEventListener("mouseup", endDrag);
+        window.addEventListener("touchend", endDrag);
+
+        function animate() {
+            const forceX = (targetX - headX) * stiffness;
+            const forceY = (targetY - headY) * stiffness;
+
+            velocityX = (velocityX + forceX) * damping;
+            velocityY = (velocityY + forceY) * damping;
+
+            headX += velocityX;
+            headY += velocityY;
+
+            const tiltX = headY * 0.15;
+            const tiltY = -headX * 0.15;
+
+            head.style.transform = `translateX(calc(-50% + ${headX}px)) translateY(${headY}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+            const stretch = 1 + Math.min(Math.abs(headY) / 120, 0.5);
+            spring.style.transform = `translateX(-50%) scaleY(${stretch}) rotate(${headX / 40}deg)`;
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script> -->

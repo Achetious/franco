@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="src/output.css">
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <style>
         /* Custom AOS: McQueen drive-in */
@@ -51,7 +53,47 @@
             }
         }
 
-        /* Hide the rest of the content initially */
+        .second-intro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            font-weight: bold;
+            color: #ef4444;
+            font-size: clamp(2rem, 8vw, 5rem);
+            opacity: 0;
+            /* 🟢 spacing between letters */
+        }
+
+        .second-intro span {
+            opacity: 0;
+            display: inline-block;
+            transform: translateX(-2500px);
+            animation: fadeInSlide 0.1s forwards;
+        }
+
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOutAll {
+            to {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hidden + fade for content */
         .hidden-content {
             opacity: 0;
             transition: opacity 1s ease-in-out;
@@ -60,17 +102,28 @@
         .show-content {
             opacity: 1;
         }
+
+        .clip-left {
+            clip-path: polygon(0 0, 90% 0, 80% 100%, 0% 100%);
+        }
+
+        .clip-right {
+            clip-path: polygon(20% 0, 100% 0, 100% 100%, 10% 100%);
+        }
     </style>
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden bg-amber-50">
     <section
-        class="bg-[url('../assets/img/bg.png')] bg-center bg-cover h-screen m-0 bg-amber-50 flex justify-center items-center flex-col relative">
+        class="bg-[url('../assets/img/bg.png')] bg-center bg-cover h-screen m-0 flex justify-center items-center flex-col relative">
 
-        <!-- “You're Invited!” intro inside main flex -->
+        <!-- “You're Invited!” intro -->
         <div id="introText" class="absolute text-red-500 font-bold md:text-8xl max-md:text-4xl intro-text">
             You're Invited!
         </div>
+
+        <!-- “Franco turns one!” intro -->
+        <div id="secondIntro" class="second-intro"></div>
 
         <!-- Main content -->
         <div id="mainContent" class="hidden-content flex flex-col justify-center items-center">
@@ -100,28 +153,106 @@
 
     </section>
 
+    <section class="relative h-full overflow-hidden flex items-center justify-center bg-amber-50">
+        <!-- Skewed Backgrounds -->
+        <div class="-inset-24 flex md:absolute max-md:hidden">
+            <!-- Left side (cream background) -->
+            <div class="md:w-1/2 max-md:w-full bg-amber-50 transform -skew-x-12 origin-right"></div>
+            <!-- Right side (yellow background) -->
+            <div class="md:w-1/2 max-md:w-full bg-yellow-400 transform -skew-x-12 origin-left"></div>
+        </div>
+
+        <!-- Content container -->
+        <div
+            class="relative z-10 flex w-full md:h-screen max-md:h-full max-md:justify-center items-center max-md:flex-col-reverse">
+            <!-- Left side content -->
+            <div class="md:w-1/2 max-md:w-full flex flex-col justify-center items-center text-center p-8">
+                <h1 class="md:text-5xl max-md:text-3xl font-extrabold text-gray-800 mb-6">Event Details</h1>
+                <div class="flex items-center text-sm flex-col my-5">
+                    <i class="fa-solid fa-calendar-days md:text-8xl max-md:text-6xl mb-6"></i>
+                    <span class="font-bold text-lg">Saturday</span>
+                    November 15, 2025<br>
+                </div>
+                <div class="flex items-center text-sm flex-col my-5">
+                    <i class="fas fa-church md:text-8xl max-md:text-6xl mb-6"></i>
+                    <span class="font-bold text-lg">Saint Andrew the Apostle Parish</span>
+                    62 Constellation, cor Nicanor Garcia St, Makati City<br>
+                    <span>Time: <span class="font-bold">9:30 AM</span></span>
+                </div>
+                <div class="flex items-center text-sm flex-col my-5">
+                    <i class="fas fa-utensils md:text-8xl max-md:text-6xl mb-6"></i>
+                    <span class="font-bold text-lg">Casa Havana</span>
+                    2542 Leiva Corner, Havana, Santa Ana, Manila, Metro Manila<br>
+                    <span>Time: <span class="font-bold">12:00 PM</span></span>
+                </div>
+            </div>
+
+            <!-- Right side content (image) -->
+            <div
+                class="relative md:w-1/2 max-md:w-full max-md:h-full flex justify-center items-center overflow-hidden max-md:py-24">
+
+                <!-- Skewed yellow background (mobile only) -->
+                <div
+                    class="max-md:absolute md:hidden inset-0 bg-yellow-400 transform max-md:skew-y-[-46deg] origin-bottom-right">
+                </div>
+
+                <!-- Lightning McQueen -->
+                <div data-aos="fade-down-left" data-aos-anchor-placement="center-bottom">
+                    <img src="assets/img/car1.png" alt="Lightning McQueen"
+                        class="relative z-10 md:w-full max-md:w-96 object-contain">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- fontawesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const intro = document.getElementById("introText");
+            const secondIntro = document.getElementById("secondIntro");
+            const main = document.getElementById("mainContent");
+
+            // Step 1: After 2.2s, remove “You’re Invited”
             setTimeout(() => {
-                const intro = document.getElementById("introText");
-                const main = document.getElementById("mainContent");
-
                 intro.style.display = "none";
-                main.style.display = "flex"; // make visible
-                main.offsetHeight; // 🧠 force reflow (important)
-                main.classList.add("show-content");
 
-                // Initialize AOS AFTER content is visible
-                AOS.init({
-                    duration: 1500,
-                    once: true,
+                // Step 2: Start Franco turns one! animation
+                const text = "Franco turns one!";
+                secondIntro.innerHTML = ""; // clear existing
+
+                [...text].forEach((char, i) => {
+                    const span = document.createElement("span");
+                    // 🟢 keep space visible
+                    span.innerHTML = char === " " ? "&nbsp;" : char;
+                    span.style.animationDelay = `${i * 0.1}s`;
+                    secondIntro.appendChild(span);
                 });
 
-                // Hard refresh ensures delays 3500–4000ms now work
-                AOS.refreshHard();
-            }, 2200);
+                secondIntro.style.opacity = "1";
+
+                // Step 3: Fade out after animation complete
+                setTimeout(() => {
+                    secondIntro.style.animation = "fadeOutAll 1s forwards";
+
+                    // Step 4: Show main content
+                    setTimeout(() => {
+                        secondIntro.style.display = "none";
+                        main.style.display = "flex";
+                        main.offsetHeight; // force reflow
+                        main.classList.add("show-content");
+
+                        // Init AOS after visible
+                        AOS.init({
+                            duration: 1500,
+                            once: true,
+                        });
+                        AOS.refreshHard();
+                    }, 1000); // 🕒 fade out for 1s only
+                }, text.length * 100 + 1000); // 🕒 trigger fade-out after 1s instead of 2s
+            }, 2000);
         });
     </script>
 </body>
