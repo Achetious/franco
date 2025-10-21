@@ -16,7 +16,7 @@
   border-radius: 10px;
   position: absolute;
   left: 50%;
-  top: -15px;
+  top: 0px;
   transform: translateX(-50%);
   transform-origin: top center;
   z-index: 0;

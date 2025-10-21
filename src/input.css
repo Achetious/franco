@@ -14,3 +14,101 @@
 body {
   @apply font-bubblegum;
 }
+
+/* Custom AOS: McQueen drive-in */
+[data-aos="drive-in-left"] {
+  opacity: 0;
+  transform: translateX(-100vw);
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+[data-aos="drive-in-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Intro animation (zoom + fade) */
+.intro-text {
+  animation: zoomFade 2s ease-in-out forwards;
+}
+
+@keyframes zoomFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+.second-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-weight: bold;
+  color: #ef4444;
+  font-size: clamp(2rem, 8vw, 5rem);
+  opacity: 0;
+  /* 🟢 spacing between letters */
+}
+
+.second-intro span {
+  opacity: 0;
+  display: inline-block;
+  transform: translateX(-2500px);
+  animation: fadeInSlide 0.1s forwards;
+}
+
+@keyframes fadeInSlide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutAll {
+  to {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hidden + fade for content */
+.hidden-content {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.show-content {
+  opacity: 1;
+}
+
+.clip-left {
+  clip-path: polygon(0 0, 90% 0, 80% 100%, 0% 100%);
+}
+
+.clip-right {
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 10% 100%);
+}
