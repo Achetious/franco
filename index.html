@@ -86,7 +86,7 @@
                     <span class="">62 Constellation, cor. Nicanor Garcia St, Makati City</span>
                     <span class="mb-2">Time: <span class="font-bold">9:30 AM</span></span>
                     <!-- Church Button -->
-                    <button type="button" data-modal-target="church-modal" data-modal-toggle="church-modal" class="cursor-pointer text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl 
+                    <button type="button" data-modal-target="church-modal" data-modal-toggle="church-modal" class="relative z-50 cursor-pointer text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl 
                                focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 
                                font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                         View map
@@ -97,7 +97,7 @@
                     <span class="font-bold max-lg:text-2xl lg:text-3xl">Casa Havana</span>
                     <span class="">2542 Leiva Corner, Havana, Santa Ana, Manila, Metro Manila</span>
                     <span class="mb-2">Time: <span class="font-bold">12:00 PM</span></span>
-                    <button type="button" data-modal-target="casa-modal" data-modal-toggle="casa-modal" class="cursor-pointer text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl 
+                    <button type="button" data-modal-target="casa-modal" data-modal-toggle="casa-modal" class="relative z-50 cursor-pointer text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl 
                            focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 
                            font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                         View Map
@@ -117,7 +117,7 @@
                 <!-- Lightning McQueen -->
                 <div data-aos="fade-down-left" data-aos-anchor-placement="center-bottom" data-aos-duration="1200"
                     data-aos-easing="cubic-bezier(0.25, 1, 0.5, 1)">
-                    <img src="assets/img/car1.png" alt="Lightning McQueen"
+                    <img src="assets/img/franco3.png" alt="Lightning McQueen"
                         class="relative z-10 lg:w-full max-lg:w-96 object-contain">
                 </div>
             </div>
@@ -232,7 +232,7 @@
                 <!-- Lightning McQueen -->
                 <div data-aos="fade-down-right" data-aos-anchor-placement="center-bottom" data-aos-duration="1200"
                     data-aos-easing="cubic-bezier(0.25, 1, 0.5, 1)">
-                    <img src="assets/img/car2.png" alt="Lightning McQueen"
+                    <img src="assets/img/franco1.png" alt="Lightning McQueen"
                         class="relative z-10 lg:w-full max-lg:w-96 object-contain">
                 </div>
             </div>
@@ -383,7 +383,16 @@
         </div>
     </section>
 
-    <section>
+    <section class="h-screen relative">
+        <div
+            class="absolute left-1/2 transform -translate-x-1/2 z-10 
+                   font-extrabold lg:text-8xl max-lg:text-3xl text-amber-300 text-shadow-md text-shadow-black 2xl:mt-20 max-2xl:mt-10 max-xl:mt-5 max-md:mt-40 text-center">
+            SAVE THE DATE
+            <div
+                class=" lg:text-5xl max-lg:text-base font-extrabold text-amber-300 text-shadow-md text-shadow-black text-center">
+                See you on my Special Day!
+            </div>
+        </div>
         <div class="sky overflow-x-hidden">
             <div class="tree overflow-x-hidden"></div>
             <div class="track overflow-x-hidden"></div>
@@ -392,6 +401,20 @@
             <div class="wheel wheel2 overflow-x-hidden"></div>
         </div>
     </section>
+
+    <!-- modal -->
+    <script>
+        document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-modal-target');
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.classList.remove('hidden');
+                    target.setAttribute('aria-hidden', 'false');
+                }
+            });
+        });
+    </script>
 
     <!-- BUBBLE HEAD -->
     <script>
